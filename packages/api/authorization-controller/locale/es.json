@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Interfaz de inicio de sesión de credenciales",
+    "description": "Ofrece flujos de inicio de sesión de credenciales a clientes autenticados."
+  }
+}

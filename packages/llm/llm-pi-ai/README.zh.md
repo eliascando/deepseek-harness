@@ -96,7 +96,7 @@ kind: "package-reference"
 
 ### 登录提供方
 
-pi-ai 提供登录的提供方可以通过 harness 授权 seam 登录：流程提供 OAuth 或交互式密钥提示（密钥键入 pi-ai 自己的登录提示，而非设置表单），得到的凭据存储在 harness 凭据存储的 `llm-pi-ai/<provider id>` 记录中。存储的登录在其路由的 `apiKeyEnv` 覆盖之下完成认证，并在存储的跨进程锁下自行刷新；退出登录即删除存储记录。落在记录文法之外——小写连字符标识符——的手工声明路由键无法登录，因为对它的记录写入会以 `LlmError('UNSTORABLE_PROVIDER_ID')` 拒绝；这类路由改用 `apiKeyEnv` 或提供方 ambient 设置认证。
+pi-ai 提供登录的提供方可以通过 harness 授权 seam 登录：流程提供 OAuth 或交互式密钥提示（密钥键入 pi-ai 自己的登录提示，而非设置表单），得到的凭据存储在 harness 凭据存储的 `llm-pi-ai/<provider id>` 记录中。存储的登录在其路由的 `apiKeyEnv` 覆盖之下完成认证，并在存储的跨进程锁下自行刷新；退出登录即删除存储记录。落在记录文法之外——小写连字符标识符——的手工声明路由键无法登录，因为对它的记录写入会以 `LlmError('UNSTORABLE_PROVIDER_ID')` 拒绝；这类路由改用 `apiKeyEnv` 或提供方 ambient 设置认证。在 Web 客户端中，**设置 → 模型**里的提供方卡片通过 [ui-settings-authorization](../../client/ui-settings-authorization/README.zh.md) 运行提供 OAuth 的流程。
 
 ### 解析模型目录
 
@@ -253,7 +253,7 @@ pi-ai 事件变成 harness 的推理、文本、工具调用、用量与 finish 
 
 - **`maxRequestImageBytes` 只计算 base64 图片载荷**，文本、工具、描述符与 JSON 结构在该上限之外，因此它必须留有余量地低于网关请求体上限。
 - **字节上限没有移除量子**：达到 `maxRequestImageBytes` 后，每张新图片都只省略最少的最老前缀，因此每个新增图片的请求都会让提示词缓存复用从该位置重新开始。
-- **登录只存在于发起它的进程中**——授权尝试不持久，因此登录中途刷新页面会放弃它，用户需要重新开始。退出登录是对已存储记录执行 `deleteRecord`，只在本地忘记它，不会告知签发方。
+- **登录只存在于发起它的进程中**——授权尝试不持久，因此登录中途 Host 退出会放弃它，用户需要重新开始；刷新后的 Web 页面会重新连接到正在运行的尝试。退出登录是对已存储记录执行 `deleteRecord`，只在本地忘记它，不会告知签发方。
 - **OpenAI 不提供 ChatGPT 登录**——pi-ai 的 Sign in with ChatGPT 用应用提供的稳定 UUID 向 OpenAI 标识安装实例，而 harness 没有用于第三方账号登录的安装 ID；`openai` 路由改用 API key 登录。
 - **提供方原生发现经本插件的 ambient context 回答**——不点名凭据的路由交由目录提供方自身解析，它会询问环境值（`AZURE_OPENAI_API_KEY`、`AWS_PROFILE` 及各提供方自有集合）与本地凭据文件。两个问题都在这里得到回答：凭据 seam 先于进程环境被查询，文件存在性则针对宿主进程的文件系统以 `~` 展开后检查。它做不到的是*读取*凭据文件内容——自行解析 `~/.aws/credentials` 的提供方会直接读取，不经该 seam。
 - **重置恢复继承配置**——重置下层 profile 提供的路由会恢复该路由。

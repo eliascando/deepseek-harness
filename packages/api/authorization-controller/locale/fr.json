@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Interface de connexion des identifiants",
+    "description": "Fournit les flux de connexion des identifiants aux clients authentifiés."
+  }
+}

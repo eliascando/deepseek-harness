@@ -124,6 +124,7 @@
     "apps/web/tests/window-controls.e2e.ts",
     "apps/web/tests/settings-import.e2e.ts",
     "apps/web/tests/models-settings.e2e.ts",
+    "apps/web/tests/models-signin.e2e.ts",
     "apps/web/tests/deepseek-messages-settings.e2e.ts",
     "apps/web/tests/model-badge.e2e.ts",
     "apps/web/tests/deepseek-messages-chat.e2e.ts",
@@ -326,6 +327,7 @@
     { "path": "./packages/document/office-to-pdf" },
 
     { "path": "./packages/api/account-controller" },
+    { "path": "./packages/api/authorization-controller" },
     { "path": "./packages/credentials/deepseek-account-platform" },
     { "path": "./packages/credentials/deepseek-account" },
     { "path": "./packages/client/ui-deliverables/tsconfig.host.json" },

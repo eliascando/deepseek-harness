@@ -4897,6 +4897,7 @@ export interface Config {
 | `@deepseek-ai/dsh-acp-app` | `cmdlineArgs` | [`packages/bundle/acp-app/src/index.ts`](../packages/bundle/acp-app/src/index.ts) |
 | `@deepseek-ai/dsh-agent` | `sessionProjections` | [`packages/core/agent/src/index.ts`](../packages/core/agent/src/index.ts) |
 | `@deepseek-ai/dsh-api-account-controller` | `deepseekAccount` · `agents` | [`packages/api/account-controller/src/index.ts`](../packages/api/account-controller/src/index.ts) |
+| `@deepseek-ai/dsh-api-authorization-controller` | `authorization` · `credentials` | [`packages/api/authorization-controller/src/index.ts`](../packages/api/authorization-controller/src/index.ts) |
 | `@deepseek-ai/dsh-api-remote-access` | — | [`packages/api/remote-access/src/index.ts`](../packages/api/remote-access/src/index.ts) |
 | `@deepseek-ai/dsh-api-remotes` | `typertGateway` | [`packages/api/remotes/src/index.ts`](../packages/api/remotes/src/index.ts) |
 | `@deepseek-ai/dsh-authorization` | `credentials` | [`packages/credentials/authorization/src/index.ts`](../packages/credentials/authorization/src/index.ts) |
@@ -4941,6 +4942,7 @@ export interface Config {
 | `@deepseek-ai/dsh-client-ui-session` | — | [`packages/client/ui-session/src/index.ts`](../packages/client/ui-session/src/index.ts) |
 | `@deepseek-ai/dsh-client-ui-settings` | — | [`packages/client/ui-settings/src/index.ts`](../packages/client/ui-settings/src/index.ts) |
 | `@deepseek-ai/dsh-client-ui-settings-agent-loop` | — | [`packages/client/ui-settings-agent-loop/src/index.ts`](../packages/client/ui-settings-agent-loop/src/index.ts) |
+| `@deepseek-ai/dsh-client-ui-settings-authorization` | — | [`packages/client/ui-settings-authorization/src/index.ts`](../packages/client/ui-settings-authorization/src/index.ts) |
 | `@deepseek-ai/dsh-client-ui-settings-general` | — | [`packages/client/ui-settings-general/src/index.ts`](../packages/client/ui-settings-general/src/index.ts) |
 | `@deepseek-ai/dsh-client-ui-settings-plugin-inventory` | — | [`packages/client/ui-settings-plugin-inventory/src/index.ts`](../packages/client/ui-settings-plugin-inventory/src/index.ts) |
 | `@deepseek-ai/dsh-client-ui-settings-plugins` | — | [`packages/client/ui-settings-plugins/src/index.ts`](../packages/client/ui-settings-plugins/src/index.ts) |

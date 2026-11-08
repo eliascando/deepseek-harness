@@ -42,6 +42,8 @@ export const remoteDefaultResponses: RemoteTable = {
     // ui-settings-account bonus notice read and acknowledgement at signing in.
     'account/getUnnotifiedBonuses': ok(null),
     'account/ackBonusNotified': ok(true),
+    // ui-settings-authorization reads the flow directory when its activity stream opens.
+    'authorization/list': ok([]),
   },
   // Stream endpoints the roster opens later than boot; declared so a spec that forgets the script gets a stream miss.
   streams: [
@@ -53,6 +55,8 @@ export const remoteDefaultResponses: RemoteTable = {
     'session/control': openStream([{ type: 'baseline', value: { projections: {} } }]),
     // ui-settings-account shares the account snapshot across settings and the sidebar menu.
     'account/watch': openStream([{ status: 'signed-out', attempt: null, links: { usageUrl: 'https://platform.deepseek.com/usage', topUpUrl: 'https://platform.deepseek.com/top_up' } }]),
+    // ui-settings-authorization folds attempt activity for the Models provider cards.
+    'authorization/watch': openStream([[]]),
     // api-workspace-controller client `apply`: the follow stream's opening baseline, then open.
     'workspace/follow': openStream([{ type: 'baseline', value: { items: [], archivedSessionIds: [], pinnedSessionIds: [] } }]),
     // api-remote-access client `mountAccess`: the owner's access snapshot, then open.

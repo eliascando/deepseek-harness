@@ -143,6 +143,11 @@
     - id: account-controller
       name: '@deepseek-ai/dsh-api-account-controller'
 
+    # Sign-in flows of the authorization seam (OAuth provider logins such as
+    # the ChatGPT subscription route) for the Models page.
+    - id: authorization-controller
+      name: '@deepseek-ai/dsh-api-authorization-controller'
+
     - id: settings-controller
       name: '@deepseek-ai/dsh-api-settings-controller'
 
@@ -315,6 +320,11 @@
 
     - id: ui-settings-models
       name: '@deepseek-ai/dsh-client-ui-settings-models'
+
+    # OAuth sign-in on Models provider cards (the ChatGPT subscription route),
+    # through the authorization-controller Remote.
+    - id: ui-settings-authorization
+      name: '@deepseek-ai/dsh-client-ui-settings-authorization'
 
     # Plugin management: the sidebar Plugins page installs, enables, disables,
     # and removes the profile's bundles through the `pluginManager` Remote.

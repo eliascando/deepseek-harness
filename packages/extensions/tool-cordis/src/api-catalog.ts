@@ -554,6 +554,50 @@ export const SERVICE_API: readonly ServiceApiEntry[] = [
     ],
   },
   {
+    key: 'authorizationController',
+    summary: 'Flow directory, attempt commands, prompt answers, and a reconnect-safe activity stream.',
+    description: 'Flow directory, attempt commands, prompt answers, and a reconnect-safe activity stream.',
+    methods: [
+      {
+        signature: '@Remote async list(): Promise<AuthorizationFlowView[]>',
+        description: 'Read every registered flow with its live state and the kind of record it has stored.',
+        parameters: [],
+        returns: 'the flows; empty when no plugin registered one.',
+      },
+      {
+        signature: '@Remote async begin(key: CredentialKey, method: string, signal: AbortSignal): Promise<AuthorizationStatus>',
+        description: 'Run one attempt; its notices and prompts appear on watch while it runs.',
+        parameters: [{ name: 'key', description: 'the credential record to authorize.' }, { name: 'method', description: 'the flow method to run.' }, { name: 'signal', description: 'caller lifetime; abort withdraws the attempt.' }],
+        returns: '`authorized` once the record is committed, `cancelled` when the human declined or the caller withdrew.',
+        throws: ['{RemoteError} `authorization/refused` when the seam does not start the attempt, `authorization/failed` when the flow fails.'],
+      },
+      {
+        signature: '@Remote answer(promptId: AuthorizationPromptId, value: string): boolean',
+        description: 'Answer a pending prompt.',
+        parameters: [{ name: 'promptId', description: 'the prompt the answer is for.' }, { name: 'value', description: 'the typed text, or the chosen option\'s id.' }],
+        returns: 'whether the prompt was still pending.',
+        throws: ['{RemoteError} `gateway/bad-request` when a select answer names no offered option or the value is empty.'],
+      },
+      {
+        signature: '@Remote decline(promptId: AuthorizationPromptId): boolean',
+        description: 'Decline a pending prompt; the attempt settles `cancelled`.',
+        parameters: [{ name: 'promptId', description: 'the prompt the human refused.' }],
+        returns: 'whether the prompt was still pending.',
+      },
+      {
+        signature: '@Remote cancel(key: CredentialKey): void',
+        description: 'Withdraw the attempt running for a key, whoever started it. Idempotent.',
+        parameters: [{ name: 'key', description: 'the credential record whose attempt to withdraw.' }],
+      },
+      {
+        signature: '@Remote({ mode: \'stream\' }) async *watch(signal: AbortSignal): AsyncIterable<AuthorizationActivity[]>',
+        description: 'Stream the activity of attempts this controller started: an initial snapshot, then a complete snapshot after every change.',
+        parameters: [{ name: 'signal', description: 'stream lifetime; ending it never withdraws an attempt.' }],
+        returns: 'complete activity snapshots.',
+      },
+    ],
+  },
+  {
     key: 'browserUse',
     summary: 'Owns one optional provider registration in the shared browser-use service.',
     description: 'Owns one optional provider registration in the shared browser-use service.',
@@ -5712,12 +5756,20 @@ export const TYPE_API: readonly TypeApiEntry[] = [
     declaration: 'export type AttachmentId = Branded<\'AttachmentId\'>;',
   },
   {
+    name: 'AuthorizationActivity',
+    declaration: 'export interface AuthorizationActivity {\n    key: CredentialKey;\n    notices: AuthorizationNotice[];\n    prompt?: AuthorizationPromptView;\n    settlement?: AuthorizationSettlement;\n}',
+  },
+  {
     name: 'AuthorizationEntry',
     declaration: 'export interface AuthorizationEntry {\n    key: CredentialKey;\n    label: string;\n    methods: readonly AuthorizationMethod[];\n    inFlight: boolean;\n}',
   },
   {
     name: 'AuthorizationFlow',
     declaration: 'export interface AuthorizationFlow {\n    readonly key: CredentialKey;\n    readonly label: string;\n    readonly methods: readonly [\n        AuthorizationMethod,\n        ...AuthorizationMethod[]\n    ];\n    run(session: AuthorizationSession): Promise<void>;\n}',
+  },
+  {
+    name: 'AuthorizationFlowView',
+    declaration: 'export interface AuthorizationFlowView {\n    key: CredentialKey;\n    label: string;\n    methods: AuthorizationMethod[];\n    inFlight: boolean;\n    credentialKind?: \'api-key\' | \'grant\';\n}',
   },
   {
     name: 'AuthorizationInteraction',
@@ -5740,8 +5792,16 @@ export const TYPE_API: readonly TypeApiEntry[] = [
     declaration: 'export type AuthorizationPrompt = {\n    signal?: AbortSignal;\n} & ({\n    kind: \'text\';\n    message: string;\n    placeholder?: string;\n} | {\n    kind: \'secret\';\n    message: string;\n    placeholder?: string;\n} | {\n    kind: \'select\';\n    message: string;\n    options: readonly AuthorizationPromptOption[];\n});',
   },
   {
+    name: 'AuthorizationPromptId',
+    declaration: 'export type AuthorizationPromptId = Branded<\'AuthorizationPromptId\'>;',
+  },
+  {
     name: 'AuthorizationPromptOption',
     declaration: 'export interface AuthorizationPromptOption {\n    id: string;\n    label: string;\n    description?: string;\n}',
+  },
+  {
+    name: 'AuthorizationPromptView',
+    declaration: 'export type AuthorizationPromptView = {\n    id: AuthorizationPromptId;\n    kind: \'text\' | \'secret\';\n    message: string;\n    placeholder?: string;\n} | {\n    id: AuthorizationPromptId;\n    kind: \'select\';\n    message: string;\n    options: AuthorizationPromptOption[];\n};',
   },
   {
     name: 'AuthorizationRequest',

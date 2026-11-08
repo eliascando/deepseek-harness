@@ -1,0 +1,11 @@
+- dialog "E2E Codex":
+  - heading "E2E Codex" [level=2]
+  - button "关闭"
+  - paragraph: 已登录。
+  - list:
+    - listitem:
+      - text: Open this page
+      - link "https://example.test/authorize":
+        - /url: https://example.test/authorize
+    - listitem: Chose device
+  - button "关闭"

@@ -448,6 +448,14 @@ export interface LaunchOptions {
   }
   /** Reuse an existing harness home so a second Host can verify user settings across origins. */
   harnessHome?: string
+  /**
+   * Register a scripted authorization flow on the booted root after the
+   * scenario providers. The sign-in scenario drives the Models page through
+   * deterministic notices, prompts, and a committed record instead of a real
+   * OAuth round trip; the shipped base bundle composes `ctx.authorization`.
+   * @param ctx - the booted root context.
+   */
+  installAuthorizationFlow?: (ctx: Context) => void
 }
 
 /** Dispose the booted tree and remove both owned temp roots, reporting every independent cleanup failure. */
@@ -921,6 +929,7 @@ export async function launchWebScaffold(options: LaunchOptions = {}): Promise<We
         new RouteOnlyAdapter(replayProviders(options.replayContextWindow)),
       ), 'web e2e scaffold: route-only adapter')
     }
+    options.installAuthorizationFlow?.(ctx)
     if (publicProxy === undefined || publicHost === undefined || publicPrefix === undefined) {
       baseUrl = `http://${browserHost}:${String(port)}`
     } else {

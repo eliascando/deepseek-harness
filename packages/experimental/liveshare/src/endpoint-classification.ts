@@ -93,6 +93,12 @@ export const VIEWER_ENDPOINT_CLASSES = {
   'account/startSignIn': 'owner-only', // owner account and sign-in; the served page never reads it
   'account/watch': 'owner-only', // owner account and sign-in; the served page never reads it
   'account/watchExpiry': 'owner-only', // owner account and sign-in; the served page never reads it
+  'authorization/answer': 'owner-only', // owner credential sign-in; prompts and stored-record kinds never reach a reader
+  'authorization/begin': 'owner-only', // owner credential sign-in; prompts and stored-record kinds never reach a reader
+  'authorization/cancel': 'owner-only', // owner credential sign-in; prompts and stored-record kinds never reach a reader
+  'authorization/decline': 'owner-only', // owner credential sign-in; prompts and stored-record kinds never reach a reader
+  'authorization/list': 'owner-only', // owner credential sign-in; prompts and stored-record kinds never reach a reader
+  'authorization/watch': 'owner-only', // owner credential sign-in; prompts and stored-record kinds never reach a reader
   'job/follow': 'owner-only', // owner background jobs'
   'job/kill': 'owner-only', // owner background jobs
   'job/list': 'owner-only', // owner background jobs'

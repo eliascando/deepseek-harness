@@ -1,0 +1,22 @@
+# Bilingual-pair consistency record for 2026-11-08-chatgpt-subscription-sign-in.md (docs/i18n/README.md): per heading
+# section, a hash of its English and Chinese blocks outside code blocks and generated regions.
+# After editing either side, bring the other along and re-record with:
+#   pnpm run verify-translation-pairing --write .agents/notes/implemented/feature/2026-11-08-chatgpt-subscription-sign-in.md
+/agent-note-chatgpt-subscription-sign-in-on-models-provider-cards:
+  en: 5cc6d98c2239cc56
+  zh: 2419044069a724d7
+/agent-note-chatgpt-subscription-sign-in-on-models-provider-cards/problem:
+  en: 608e18f78122085d
+  zh: 837e30227bb9e55c
+/agent-note-chatgpt-subscription-sign-in-on-models-provider-cards/decision:
+  en: a004abac7961d010
+  zh: e5bf735e5f7a62ab
+/agent-note-chatgpt-subscription-sign-in-on-models-provider-cards/alternatives-considered:
+  en: 6db135418f7832be
+  zh: e841b74999dd16b1
+/agent-note-chatgpt-subscription-sign-in-on-models-provider-cards/testing:
+  en: e9b7dc7bf763fcc3
+  zh: 1a7d56722d284c8b
+/agent-note-chatgpt-subscription-sign-in-on-models-provider-cards/consequences:
+  en: 5e3ea3da6e006751
+  zh: e6111bdf3a2abe50

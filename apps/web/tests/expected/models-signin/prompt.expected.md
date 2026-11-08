@@ -1,0 +1,14 @@
+- dialog "E2E Codex":
+  - heading "E2E Codex" [level=2]
+  - button "关闭"
+  - paragraph: 请在打开的页面中完成登录，或按下面的步骤操作。
+  - list:
+    - listitem:
+      - text: Open this page
+      - link "https://example.test/authorize":
+        - /url: https://example.test/authorize
+  - paragraph: Choose a login method
+  - button "Browser login"
+  - button "Device code"
+  - button "放弃"
+  - button "取消"

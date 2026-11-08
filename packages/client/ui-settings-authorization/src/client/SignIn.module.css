@@ -1,0 +1,119 @@
+/* Provider-card sign-in area and the attempt dialog, in the settings-panel
+ * vocabulary of the Models section: 14/22 body and `--dsw-alias-*` tokens. */
+
+.area {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  margin-top: 12px;
+}
+
+.connected {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 1px 6px 1px 5px;
+  border: 1px solid var(--dsw-alias-border-l3);
+  border-radius: 4px;
+  color: var(--dsw-alias-state-success-primary);
+  font-size: 11px;
+  line-height: 16px;
+}
+
+.connectedDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentcolor;
+}
+
+.dialog {
+  max-width: 480px;
+}
+
+.notices {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.notice {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  color: var(--dsw-alias-label-secondary);
+  font-size: 14px;
+  line-height: 22px;
+}
+
+.noticeLink {
+  color: var(--dsw-alias-brand-primary);
+  font-size: 13px;
+  line-height: 20px;
+  word-break: break-all;
+}
+
+.noticeCode {
+  width: fit-content;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: var(--dsw-alias-bg-layer-2);
+  color: var(--dsw-alias-label-primary);
+  font-size: 13px;
+  line-height: 20px;
+}
+
+.prompt {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.promptMessage {
+  margin: 0;
+  color: var(--dsw-alias-label-primary);
+  font-size: 14px;
+  line-height: 22px;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.input {
+  box-sizing: border-box;
+  width: 100%;
+  height: 32px;
+  padding: 0 10px;
+  border: 0.5px solid var(--dsw-alias-border-l4);
+  border-radius: var(--dsw-radius-md);
+  background: var(--dsw-alias-bg-layer-1);
+  color: var(--dsw-alias-label-primary);
+  font: inherit;
+  font-size: 14px;
+  line-height: 22px;
+}
+
+.promptActions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.decline {
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--dsw-alias-label-tertiary);
+  font: inherit;
+  font-size: 13px;
+  line-height: 20px;
+  cursor: pointer;
+}

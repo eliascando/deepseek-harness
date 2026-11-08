@@ -383,6 +383,13 @@ const SERVICE_ROLES: ServiceRole[] = [
     note: 'Projects the credential-reference seam onto the generated Remote namespace: batch fan-out, view projection, and refusal mapping live here, not on the seam Definition.',
   },
   {
+    key: 'authorizationController',
+    pkg: 'api-authorization-controller',
+    title: 'Host sign-in Remote controller',
+    mode: 'core',
+    note: 'Projects the authorization seam onto the generated Remote namespace: it supplies each attempt\'s interaction, holds pending prompts, and streams activity snapshots, so the seam Definition stays transport-free.',
+  },
+  {
     key: 'settingsController',
     pkg: 'api-settings-controller',
     title: 'Host settings-surface Remote controller',
@@ -504,7 +511,7 @@ const SERVICE_ROLES: ServiceRole[] = [
     title: 'Authorization flow registry',
     mode: 'seam',
     implementations: [],
-    consumers: ['llm-pi-ai'],
+    consumers: ['llm-pi-ai', 'api-authorization-controller'],
     note: 'Flows are registered by the plugin that knows how to obtain one credential and keyed by the record they write; the seam owns the conversation and the one-attempt-per-key lifecycle, never the protocol.',
   },
   {

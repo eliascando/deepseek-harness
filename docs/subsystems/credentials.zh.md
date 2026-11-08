@@ -131,6 +131,62 @@ async begin(request: AuthorizationRequest): Promise<AuthorizationOutcome>
 
 Source: [`packages/credentials/authorization/src/index.ts`](../../packages/credentials/authorization/src/index.ts)
 
+<a id="ctxauthorizationcontroller--authorizationcontroller"></a>
+
+### `ctx.authorizationController` — `AuthorizationController`
+
+Flow directory, attempt commands, prompt answers, and a reconnect-safe activity stream.
+
+```ts cordis-catalog
+/**
+ * Read every registered flow with its live state and the kind of record it has stored.
+ * @returns the flows; empty when no plugin registered one.
+ */
+@Remote async list(): Promise<AuthorizationFlowView[]>
+
+/**
+ * Run one attempt; its notices and prompts appear on {@link watch} while it runs.
+ * @param key - the credential record to authorize.
+ * @param method - the flow method to run.
+ * @param signal - caller lifetime; abort withdraws the attempt.
+ * @returns `authorized` once the record is committed, `cancelled` when the human declined or the caller withdrew.
+ * @throws {RemoteError} `authorization/refused` when the seam does not start the attempt, `authorization/failed` when the flow fails.
+ */
+@Remote async begin(key: CredentialKey, method: string, signal: AbortSignal): Promise<AuthorizationStatus>
+
+/**
+ * Answer a pending prompt.
+ * @param promptId - the prompt the answer is for.
+ * @param value - the typed text, or the chosen option's id.
+ * @returns whether the prompt was still pending.
+ * @throws {RemoteError} `gateway/bad-request` when a select answer names no offered option or the value is empty.
+ */
+@Remote answer(promptId: AuthorizationPromptId, value: string): boolean
+
+/**
+ * Decline a pending prompt; the attempt settles `cancelled`.
+ * @param promptId - the prompt the human refused.
+ * @returns whether the prompt was still pending.
+ */
+@Remote decline(promptId: AuthorizationPromptId): boolean
+
+/**
+ * Withdraw the attempt running for a key, whoever started it. Idempotent.
+ * @param key - the credential record whose attempt to withdraw.
+ */
+@Remote cancel(key: CredentialKey): void
+
+/**
+ * Stream the activity of attempts this controller started: an initial
+ * snapshot, then a complete snapshot after every change.
+ * @param signal - stream lifetime; ending it never withdraws an attempt.
+ * @returns complete activity snapshots.
+ */
+@Remote({ mode: 'stream' }) async *watch(signal: AbortSignal): AsyncIterable<AuthorizationActivity[]>
+```
+
+Source: [`packages/api/authorization-controller/src/index.ts`](../../packages/api/authorization-controller/src/index.ts)
+
 <a id="ctxcredentials--credentialprovider-abstract-seam"></a>
 
 ### `ctx.credentials` — `CredentialProvider` (abstract seam)

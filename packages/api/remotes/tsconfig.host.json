@@ -24,6 +24,9 @@
       "path": "../../credentials/credentials"
     },
     {
+      "path": "../../credentials/authorization"
+    },
+    {
       "path": "../../interaction/commands"
     },
     {
@@ -91,6 +94,9 @@
     },
     {
       "path": "../account-controller"
+    },
+    {
+      "path": "../authorization-controller"
     },
     {
       "path": "../../credentials/deepseek-account"
